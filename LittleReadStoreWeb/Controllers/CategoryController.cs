@@ -16,5 +16,10 @@ namespace LittleReadStoreWeb.Controllers
             List<Category> objCategories = _db.Categories.ToList();
             return View(objCategories);
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }
