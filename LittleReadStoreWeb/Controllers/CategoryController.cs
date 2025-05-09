@@ -1,8 +1,8 @@
-﻿using LittleReadStoreWeb.Data;
-using LittleReadStoreWeb.Models;
+﻿using LittleReadStore.DataAccess;
+using LittleReadStore.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LittleReadStoreWeb.Controllers
+namespace LittleReadStoreWeb.Controllers 
 {
     public class CategoryController : Controller
     {
@@ -29,6 +29,7 @@ namespace LittleReadStoreWeb.Controllers
             {
                 _db.Categories.Add(obj);
                 _db.SaveChanges();
+                TempData["success"] = "Category created successfully!";
                 return RedirectToAction("Index");
             }
             return View();
@@ -55,6 +56,7 @@ namespace LittleReadStoreWeb.Controllers
             {
                 _db.Categories.Update(obj);
                 _db.SaveChanges();
+                TempData["success"] = "Category edited successfully!";
                 return RedirectToAction("Index");
             }
             return View();
@@ -84,6 +86,7 @@ namespace LittleReadStoreWeb.Controllers
 
             _db.Categories.Remove(category);
             _db.SaveChanges();
+            TempData["success"] = "Category deleted successfully!";
             return RedirectToAction("Index");
         }
 

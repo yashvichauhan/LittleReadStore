@@ -1,4 +1,4 @@
-namespace LittleReadStoreWeb.Models
+namespace LittleReadStore.Models
 {
     public class ErrorViewModel
     {

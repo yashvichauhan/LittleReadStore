@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace LittleReadStoreWeb.Migrations
+namespace LittleReadStore.Migrations
 {
     /// <inheritdoc />
     public partial class addcategorydb : Migration

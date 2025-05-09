@@ -1,4 +1,4 @@
-using LittleReadStoreWeb.Models;
+using LittleReadStore.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

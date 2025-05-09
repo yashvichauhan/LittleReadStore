@@ -1,7 +1,7 @@
-﻿using LittleReadStoreWeb.Models;
+﻿using LittleReadStore.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace LittleReadStoreWeb.Data
+namespace LittleReadStore.DataAccess
 {
     public class ApplicationDbContext : DbContext
     {

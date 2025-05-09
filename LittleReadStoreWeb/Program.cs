@@ -1,4 +1,4 @@
-using LittleReadStoreWeb.Data;
+using LittleReadStore.DataAccess;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
