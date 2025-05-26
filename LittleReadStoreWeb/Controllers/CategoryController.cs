@@ -1,4 +1,5 @@
 ﻿using LittleReadStore.DataAccess;
+using LittleReadStore.DataAccess.Repository.IRepository;
 using LittleReadStore.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,17 +7,17 @@ namespace LittleReadStoreWeb.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ApplicationDbContext _db;
-        public CategoryController(ApplicationDbContext db)
+        private readonly ICategoryRepository _categoryRepo;
+        public CategoryController(ICategoryRepository db)
         {
-            _db = db;
+            _categoryRepo = db;
         }
         public IActionResult Index()
         {
-            List<Category> objCategories = _db.Categories.ToList();
+            List<Category> objCategories = _categoryRepo.GetAll().ToList();
             return View(objCategories);
         }
-
+         
         public IActionResult Create()
         {
             return View();
@@ -27,8 +28,8 @@ namespace LittleReadStoreWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.Categories.Add(obj);
-                _db.SaveChanges();
+                _categoryRepo.Add(obj);
+                _categoryRepo.Save();
                 TempData["success"] = "Category created successfully!";
                 return RedirectToAction("Index");
             }
@@ -41,7 +42,7 @@ namespace LittleReadStoreWeb.Controllers
             {
                 return NotFound();
             }  
-            Category? category = _db.Categories.Find(id);
+            Category? category = _categoryRepo.Get(u => u.CategoryId == id);
             if (category == null)
             {
                 return NotFound();
@@ -54,8 +55,8 @@ namespace LittleReadStoreWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.Categories.Update(obj);
-                _db.SaveChanges();
+                _categoryRepo.Update(obj);
+                _categoryRepo.Save();
                 TempData["success"] = "Category edited successfully!";
                 return RedirectToAction("Index");
             }
@@ -67,7 +68,7 @@ namespace LittleReadStoreWeb.Controllers
             {
                 return NotFound();
             }
-            Category? category = _db.Categories.Find(id);
+            Category? category = _categoryRepo.Get(u => u.CategoryId == id);
             if (category == null)
             {
                 return NotFound();
@@ -78,14 +79,14 @@ namespace LittleReadStoreWeb.Controllers
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            var category = _db.Categories.Find(id);
+            var category = _categoryRepo.Get(u => u.CategoryId == id);
             if (category == null)
             {
                 return NotFound();
             }
 
-            _db.Categories.Remove(category);
-            _db.SaveChanges();
+            _categoryRepo.Remove(category);
+            _categoryRepo.Save();
             TempData["success"] = "Category deleted successfully!";
             return RedirectToAction("Index");
         }
